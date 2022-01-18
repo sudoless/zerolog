@@ -430,7 +430,6 @@ func ExampleContext_Object() {
 }
 
 func ExampleContext_EmbedObject() {
-
 	price := Price{val: 6449, prec: 2, unit: "$"}
 
 	log := zerolog.New(os.Stdout).With().

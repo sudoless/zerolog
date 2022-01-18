@@ -480,6 +480,7 @@ func ExampleContext_EmbedObject() {
 	fmt.Println(decodeIfBinaryToString(dst.Bytes()))
 	// Output: {"foo":"bar","price":"$64.49","message":"hello world"}
 }
+
 func ExampleContext_Object() {
 	// User implements LogObjectMarshaler
 	u := User{"John", 35, time.Time{}}
