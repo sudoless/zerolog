@@ -1,3 +1,4 @@
+//go:build !windows
 // +build !windows
 
 // Package journald provides a io.Writer to send the logs
@@ -24,8 +25,8 @@ import (
 	"strings"
 
 	"github.com/coreos/go-systemd/v22/journal"
-	"github.com/rs/zerolog"
-	"github.com/rs/zerolog/internal/cbor"
+	"github.com/sudoless/zerolog"
+	"github.com/sudoless/zerolog/internal/cbor"
 )
 
 const defaultJournalDPrio = journal.PriNotice
