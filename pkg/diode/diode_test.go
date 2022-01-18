@@ -1,34 +1,15 @@
 package diode_test
 
 import (
-	"bytes"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 	"testing"
 	"time"
 
-	"github.com/sudoless/zerolog/internal/cbor"
 	"github.com/sudoless/zerolog/pkg/diode"
 	"github.com/sudoless/zerolog/pkg/zerolog"
 )
-
-func TestNewWriter(t *testing.T) {
-	buf := bytes.Buffer{}
-	w := diode.NewWriter(&buf, 1000, 0, func(missed int) {
-		fmt.Printf("Dropped %d messages\n", missed)
-	})
-	log := zerolog.New(w)
-	log.Print("test")
-
-	w.Close()
-	want := "{\"level\":\"debug\",\"message\":\"test\"}\n"
-	got := cbor.DecodeIfBinaryToString(buf.Bytes())
-	if got != want {
-		t.Errorf("Diode New Writer Test failed. got:%s, want:%s!", got, want)
-	}
-}
 
 func Benchmark(b *testing.B) {
 	log.SetOutput(ioutil.Discard)

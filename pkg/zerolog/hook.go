@@ -21,6 +21,7 @@ type LevelHook struct {
 }
 
 // Run implements the Hook interface.
+//gocyclo:ignore
 func (h LevelHook) Run(e *Event, level Level, message string) {
 	switch level {
 	case TraceLevel:
