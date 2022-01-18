@@ -7,7 +7,7 @@ package zlog
 // JSON encoded byte stream.
 
 import (
-	"github.com/sudoless/zerolog/internal/json"
+	"github.com/sudoless/zerolog/v2/internal/json"
 )
 
 var (

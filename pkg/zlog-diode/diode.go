@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/sudoless/zerolog/pkg/zlog-diode/internal/diodes"
+	"github.com/sudoless/zerolog/v2/pkg/zlog-diode/internal/diodes"
 )
 
 var bufPool = &sync.Pool{
