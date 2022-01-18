@@ -1,4 +1,4 @@
-// Package zerolog provides a lightweight logging library dedicated to JSON logging.
+// Package zlog provides a lightweight logging library dedicated to JSON logging.
 //
 // A global Logger can be use for simple logging:
 //
@@ -105,8 +105,6 @@ import (
 	"os"
 	"strconv"
 )
-
-const contextCallerSkipFrameCount = 3
 
 // Level defines log levels.
 type Level int8

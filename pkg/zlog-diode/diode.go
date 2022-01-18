@@ -1,4 +1,4 @@
-// Package diode provides a thread-safe, lock-free, non-blocking io.Writer
+// Package zlog_diode provides a thread-safe, lock-free, non-blocking io.Writer
 // wrapper.
 package zlog_diode
 
@@ -108,7 +108,7 @@ func (dw Writer) poll() {
 		// See https://golang.org/issue/23199
 		const maxSize = 1 << 16 // 64KiB
 		if cap(p) <= maxSize {
-			bufPool.Put(p[:0])
+			bufPool.Put(p[:0]) //nolint:staticcheck
 		}
 	}
 }
