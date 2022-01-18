@@ -18,7 +18,7 @@ func ExampleNewWriter() {
 	log := zerolog.New(w)
 	log.Print("test")
 
-	w.Close()
+	_ = w.Close()
 
 	// Output: {"level":"debug","message":"test"}
 }

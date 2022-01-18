@@ -56,6 +56,7 @@ func (d *ManyToOne) Set(data GenericDataType) {
 			seq:  writeIndex,
 		}
 
+		//#nosec G103
 		if !atomic.CompareAndSwapPointer(&d.buffer[idx], old, unsafe.Pointer(newBucket)) {
 			log.Println("Diode set collision: consider using a larger diode")
 			continue

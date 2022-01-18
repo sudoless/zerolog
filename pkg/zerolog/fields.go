@@ -9,6 +9,7 @@ import (
 )
 
 func isNilValue(i interface{}) bool {
+	//#nosec G103
 	return (*[2]uintptr)(unsafe.Pointer(&i))[1] == 0
 }
 

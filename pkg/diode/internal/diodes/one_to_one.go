@@ -62,6 +62,7 @@ func (d *OneToOne) Set(data GenericDataType) {
 	}
 	d.writeIndex++
 
+	//#nosec G103
 	atomic.StorePointer(&d.buffer[idx], unsafe.Pointer(newBucket))
 }
 

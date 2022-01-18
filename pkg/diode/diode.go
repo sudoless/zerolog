@@ -98,7 +98,7 @@ func (dw Writer) poll() {
 			return
 		}
 		p := *(*[]byte)(d)
-		dw.w.Write(p)
+		_, _ = dw.w.Write(p)
 
 		// Proper usage of a sync.Pool requires each entry to have approximately
 		// the same memory cost. To obtain this property when the stored type

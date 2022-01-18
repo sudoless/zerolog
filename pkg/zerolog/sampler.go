@@ -31,6 +31,8 @@ func (s RandomSampler) Sample(lvl Level) bool {
 	if s <= 0 {
 		return false
 	}
+
+	//#nosec G404
 	if rand.Intn(int(s)) != 0 {
 		return false
 	}
