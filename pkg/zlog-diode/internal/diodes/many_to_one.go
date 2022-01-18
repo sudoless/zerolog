@@ -9,10 +9,10 @@ import (
 // ManyToOne diode is optimal for many writers (go-routines B-n) and a single
 // reader (go-routine A). It is not thread safe for multiple readers.
 type ManyToOne struct {
+	alerter    Alerter
+	buffer     []unsafe.Pointer
 	writeIndex uint64
 	readIndex  uint64
-	buffer     []unsafe.Pointer
-	alerter    Alerter
 }
 
 // NewManyToOne creates a new diode (ring buffer). The ManyToOne diode

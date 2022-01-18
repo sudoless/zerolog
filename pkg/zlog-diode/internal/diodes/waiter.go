@@ -9,9 +9,9 @@ import (
 // available.
 type Waiter struct {
 	Diode
-	mu  sync.Mutex
-	c   *sync.Cond
 	ctx context.Context
+	c   *sync.Cond
+	mu  sync.Mutex
 }
 
 // WaiterConfigOption can be used to setup the waiter.

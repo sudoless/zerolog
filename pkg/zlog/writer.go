@@ -26,8 +26,8 @@ func (lw levelWriterAdapter) WriteLevel(_ Level, p []byte) (n int, err error) {
 }
 
 type syncWriter struct {
-	mu sync.Mutex
 	lw LevelWriter
+	mu sync.Mutex
 }
 
 // SyncWriter wraps w so that each call to Write is synchronized with a mutex.

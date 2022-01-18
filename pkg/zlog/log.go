@@ -196,10 +196,10 @@ func ParseLevel(levelStr string) (Level, error) {
 // you may consider a sync wrapper.
 type Logger struct {
 	w       LevelWriter
-	level   Level
 	sampler Sampler
 	context []byte
 	hooks   []Hook
+	level   Level
 	stack   bool
 }
 

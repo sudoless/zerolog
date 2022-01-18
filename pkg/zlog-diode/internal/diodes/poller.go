@@ -14,8 +14,8 @@ type Diode interface {
 // Poller will poll a diode until a value is available.
 type Poller struct {
 	Diode
-	interval time.Duration
 	ctx      context.Context
+	interval time.Duration
 }
 
 // PollerConfigOption can be used to setup the poller.

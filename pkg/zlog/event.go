@@ -20,13 +20,13 @@ var eventPool = &sync.Pool{
 // Event represents a log event. It is instanced by one of the level method of
 // Logger and finalized by the Msg or Msgf method.
 type Event struct {
-	buf       []byte
 	w         LevelWriter
-	level     Level
 	done      func(msg string)
-	stack     bool   // enable error stack trace
-	ch        []Hook // hooks from context
-	skipFrame int    // The number of additional frames to skip when printing the caller.
+	buf       []byte
+	ch        []Hook
+	skipFrame int
+	level     Level
+	stack     bool
 }
 
 func putEvent(e *Event) {

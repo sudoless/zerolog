@@ -59,17 +59,11 @@ func (s *BasicSampler) Sample(_ Level) bool {
 // BurstSampler lets Burst events pass per Period then pass the decision to
 // NextSampler. If Sampler is not set, all subsequent events are rejected.
 type BurstSampler struct {
-	// Burst is the maximum number of event per period allowed before calling
-	// NextSampler.
-	Burst uint32
-	// Period defines the burst period. If 0, NextSampler is always called.
-	Period time.Duration
-	// NextSampler is the sampler used after the burst is reached. If nil,
-	// events are always rejected after the burst.
 	NextSampler Sampler
-
-	counter uint32
-	resetAt int64
+	Period      time.Duration
+	resetAt     int64
+	Burst       uint32
+	counter     uint32
 }
 
 // Sample implements the Sampler interface.
