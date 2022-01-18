@@ -8,7 +8,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/sudoless/zerolog"
+	"github.com/sudoless/zerolog/pkg/zerolog"
 )
 
 func writeLog(fname string, count int, useCompress bool) {

@@ -9,9 +9,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/sudoless/zerolog"
-	"github.com/sudoless/zerolog/diode"
 	"github.com/sudoless/zerolog/internal/cbor"
+	"github.com/sudoless/zerolog/pkg/diode"
+	"github.com/sudoless/zerolog/pkg/zerolog"
 )
 
 func TestNewWriter(t *testing.T) {

@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/sudoless/zerolog"
-	"github.com/sudoless/zerolog/diode"
+	"github.com/sudoless/zerolog/pkg/diode"
+	"github.com/sudoless/zerolog/pkg/zerolog"
 )
 
 func ExampleNewWriter() {

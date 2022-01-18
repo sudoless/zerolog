@@ -9,8 +9,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/sudoless/zerolog"
-	"github.com/sudoless/zerolog/log"
+	"github.com/sudoless/zerolog/pkg/log"
+	"github.com/sudoless/zerolog/pkg/zerolog"
 )
 
 // setup would normally be an init() function, however, there seems

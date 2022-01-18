@@ -7,7 +7,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/sudoless/zerolog"
+	"github.com/sudoless/zerolog/pkg/zerolog"
 )
 
 // Logger is the global logger.

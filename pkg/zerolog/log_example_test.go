@@ -11,7 +11,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/sudoless/zerolog"
+	"github.com/sudoless/zerolog/pkg/zerolog"
 )
 
 func ExampleNew() {
