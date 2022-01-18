@@ -1,7 +1,7 @@
 //go:build !binary_log && !windows
 // +build !binary_log,!windows
 
-package zerolog
+package zlog
 
 import (
 	"errors"

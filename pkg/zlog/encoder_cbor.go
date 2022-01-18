@@ -1,7 +1,7 @@
 //go:build binary_log
 // +build binary_log
 
-package zerolog
+package zlog
 
 // This file contains bindings to do binary encoding.
 

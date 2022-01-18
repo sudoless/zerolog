@@ -1,6 +1,6 @@
 // Package diode provides a thread-safe, lock-free, non-blocking io.Writer
 // wrapper.
-package diode
+package zlog_diode
 
 import (
 	"context"
@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/sudoless/zerolog/pkg/diode/internal/diodes"
+	"github.com/sudoless/zerolog/pkg/zlog-diode/internal/diodes"
 )
 
 var bufPool = &sync.Pool{

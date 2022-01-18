@@ -1,4 +1,4 @@
-package zerolog
+package zlog
 
 import (
 	"net"

@@ -1,7 +1,7 @@
 //go:build !binary_log
 // +build !binary_log
 
-package zerolog_test
+package zlog_test
 
 import (
 	"errors"
@@ -11,18 +11,18 @@ import (
 	"os"
 	"time"
 
-	"github.com/sudoless/zerolog/pkg/zerolog"
+	"github.com/sudoless/zerolog/pkg/zlog"
 )
 
 func ExampleNew() {
-	log := zerolog.New(os.Stdout)
+	log := zlog.New(os.Stdout)
 
 	log.Info().Msg("hello world")
 	// Output: {"level":"info","message":"hello world"}
 }
 
 func ExampleLogger_With() {
-	log := zerolog.New(os.Stdout).
+	log := zlog.New(os.Stdout).
 		With().
 		Str("foo", "bar").
 		Logger()
@@ -33,7 +33,7 @@ func ExampleLogger_With() {
 }
 
 func ExampleLogger_Level() {
-	log := zerolog.New(os.Stdout).Level(zerolog.WarnLevel)
+	log := zlog.New(os.Stdout).Level(zlog.WarnLevel)
 
 	log.Info().Msg("filtered out message")
 	log.Error().Msg("kept message")
@@ -42,7 +42,7 @@ func ExampleLogger_Level() {
 }
 
 func ExampleLogger_Sample() {
-	log := zerolog.New(os.Stdout).Sample(&zerolog.BasicSampler{N: 2})
+	log := zlog.New(os.Stdout).Sample(&zlog.BasicSampler{N: 2})
 
 	log.Info().Msg("message 1")
 	log.Info().Msg("message 2")
@@ -55,8 +55,8 @@ func ExampleLogger_Sample() {
 
 type LevelNameHook struct{}
 
-func (h LevelNameHook) Run(e *zerolog.Event, l zerolog.Level, msg string) {
-	if l != zerolog.NoLevel {
+func (h LevelNameHook) Run(e *zlog.Event, l zlog.Level, msg string) {
+	if l != zlog.NoLevel {
 		e.Str("level_name", l.String())
 	} else {
 		e.Str("level_name", "NoLevel")
@@ -65,7 +65,7 @@ func (h LevelNameHook) Run(e *zerolog.Event, l zerolog.Level, msg string) {
 
 type MessageHook string
 
-func (h MessageHook) Run(e *zerolog.Event, l zerolog.Level, msg string) {
+func (h MessageHook) Run(e *zlog.Event, l zlog.Level, msg string) {
 	e.Str("the_message", msg)
 }
 
@@ -73,7 +73,7 @@ func ExampleLogger_Hook() {
 	var levelNameHook LevelNameHook
 	var messageHook MessageHook = "The message"
 
-	log := zerolog.New(os.Stdout).Hook(levelNameHook).Hook(messageHook)
+	log := zlog.New(os.Stdout).Hook(levelNameHook).Hook(messageHook)
 
 	log.Info().Msg("hello world")
 
@@ -81,7 +81,7 @@ func ExampleLogger_Hook() {
 }
 
 func ExampleLogger_Print() {
-	log := zerolog.New(os.Stdout)
+	log := zlog.New(os.Stdout)
 
 	log.Print("hello world")
 
@@ -89,7 +89,7 @@ func ExampleLogger_Print() {
 }
 
 func ExampleLogger_Printf() {
-	log := zerolog.New(os.Stdout)
+	log := zlog.New(os.Stdout)
 
 	log.Printf("hello %s", "world")
 
@@ -97,7 +97,7 @@ func ExampleLogger_Printf() {
 }
 
 func ExampleLogger_Trace() {
-	log := zerolog.New(os.Stdout)
+	log := zlog.New(os.Stdout)
 
 	log.Trace().
 		Str("foo", "bar").
@@ -108,7 +108,7 @@ func ExampleLogger_Trace() {
 }
 
 func ExampleLogger_Debug() {
-	log := zerolog.New(os.Stdout)
+	log := zlog.New(os.Stdout)
 
 	log.Debug().
 		Str("foo", "bar").
@@ -119,7 +119,7 @@ func ExampleLogger_Debug() {
 }
 
 func ExampleLogger_Info() {
-	log := zerolog.New(os.Stdout)
+	log := zlog.New(os.Stdout)
 
 	log.Info().
 		Str("foo", "bar").
@@ -130,7 +130,7 @@ func ExampleLogger_Info() {
 }
 
 func ExampleLogger_Warn() {
-	log := zerolog.New(os.Stdout)
+	log := zlog.New(os.Stdout)
 
 	log.Warn().
 		Str("foo", "bar").
@@ -140,7 +140,7 @@ func ExampleLogger_Warn() {
 }
 
 func ExampleLogger_Error() {
-	log := zerolog.New(os.Stdout)
+	log := zlog.New(os.Stdout)
 
 	log.Error().
 		Err(errors.New("some error")).
@@ -150,16 +150,16 @@ func ExampleLogger_Error() {
 }
 
 func ExampleLogger_WithLevel() {
-	log := zerolog.New(os.Stdout)
+	log := zlog.New(os.Stdout)
 
-	log.WithLevel(zerolog.InfoLevel).
+	log.WithLevel(zlog.InfoLevel).
 		Msg("hello world")
 
 	// Output: {"level":"info","message":"hello world"}
 }
 
 func ExampleLogger_Write() {
-	log := zerolog.New(os.Stdout).With().
+	log := zlog.New(os.Stdout).With().
 		Str("foo", "bar").
 		Logger()
 
@@ -172,7 +172,7 @@ func ExampleLogger_Write() {
 }
 
 func ExampleLogger_Log() {
-	log := zerolog.New(os.Stdout)
+	log := zlog.New(os.Stdout)
 
 	log.Log().
 		Str("foo", "bar").
@@ -183,11 +183,11 @@ func ExampleLogger_Log() {
 }
 
 func ExampleEvent_Dict() {
-	log := zerolog.New(os.Stdout)
+	log := zlog.New(os.Stdout)
 
 	log.Log().
 		Str("foo", "bar").
-		Dict("dict", zerolog.Dict().
+		Dict("dict", zlog.Dict().
 			Str("bar", "baz").
 			Int("n", 1),
 		).
@@ -202,7 +202,7 @@ type User struct {
 	Created time.Time
 }
 
-func (u User) MarshalZerologObject(e *zerolog.Event) {
+func (u User) MarshalZerologObject(e *zlog.Event) {
 	e.Str("name", u.Name).
 		Int("age", u.Age).
 		Time("created", u.Created)
@@ -214,7 +214,7 @@ type Price struct {
 	unit string
 }
 
-func (p Price) MarshalZerologObject(e *zerolog.Event) {
+func (p Price) MarshalZerologObject(e *zlog.Event) {
 	denom := uint64(1)
 	for i := 0; i < p.prec; i++ {
 		denom *= 10
@@ -226,21 +226,21 @@ func (p Price) MarshalZerologObject(e *zerolog.Event) {
 
 type Users []User
 
-func (uu Users) MarshalZerologArray(a *zerolog.Array) {
+func (uu Users) MarshalZerologArray(a *zlog.Array) {
 	for _, u := range uu {
 		a.Object(u)
 	}
 }
 
 func ExampleEvent_Array() {
-	log := zerolog.New(os.Stdout)
+	log := zlog.New(os.Stdout)
 
 	log.Log().
 		Str("foo", "bar").
-		Array("array", zerolog.Arr().
+		Array("array", zlog.Arr().
 			Str("baz").
 			Int(1).
-			Dict(zerolog.Dict().
+			Dict(zlog.Dict().
 				Str("bar", "baz").
 				Int("n", 1),
 			),
@@ -251,7 +251,7 @@ func ExampleEvent_Array() {
 }
 
 func ExampleEvent_Array_object() {
-	log := zerolog.New(os.Stdout)
+	log := zlog.New(os.Stdout)
 
 	// Users implements zerolog.LogArrayMarshaler
 	u := Users{
@@ -268,7 +268,7 @@ func ExampleEvent_Array_object() {
 }
 
 func ExampleEvent_Object() {
-	log := zerolog.New(os.Stdout)
+	log := zlog.New(os.Stdout)
 
 	// User implements zerolog.LogObjectMarshaler
 	u := User{"John", 35, time.Time{}}
@@ -282,7 +282,7 @@ func ExampleEvent_Object() {
 }
 
 func ExampleEvent_EmbedObject() {
-	log := zerolog.New(os.Stdout)
+	log := zlog.New(os.Stdout)
 
 	price := Price{val: 6449, prec: 2, unit: "$"}
 
@@ -295,7 +295,7 @@ func ExampleEvent_EmbedObject() {
 }
 
 func ExampleEvent_Interface() {
-	log := zerolog.New(os.Stdout)
+	log := zlog.New(os.Stdout)
 
 	obj := struct {
 		Name string `json:"name"`
@@ -314,7 +314,7 @@ func ExampleEvent_Interface() {
 func ExampleEvent_Dur() {
 	d := 10 * time.Second
 
-	log := zerolog.New(os.Stdout)
+	log := zlog.New(os.Stdout)
 
 	log.Log().
 		Str("foo", "bar").
@@ -330,7 +330,7 @@ func ExampleEvent_Durs() {
 		20 * time.Second,
 	}
 
-	log := zerolog.New(os.Stdout)
+	log := zlog.New(os.Stdout)
 
 	log.Log().
 		Str("foo", "bar").
@@ -346,7 +346,7 @@ func ExampleEvent_Fields_map() {
 		"n":   1,
 	}
 
-	log := zerolog.New(os.Stdout)
+	log := zlog.New(os.Stdout)
 
 	log.Log().
 		Str("foo", "bar").
@@ -362,7 +362,7 @@ func ExampleEvent_Fields_slice() {
 		"n", 1,
 	}
 
-	log := zerolog.New(os.Stdout)
+	log := zlog.New(os.Stdout)
 
 	log.Log().
 		Str("foo", "bar").
@@ -373,9 +373,9 @@ func ExampleEvent_Fields_slice() {
 }
 
 func ExampleContext_Dict() {
-	log := zerolog.New(os.Stdout).With().
+	log := zlog.New(os.Stdout).With().
 		Str("foo", "bar").
-		Dict("dict", zerolog.Dict().
+		Dict("dict", zlog.Dict().
 			Str("bar", "baz").
 			Int("n", 1),
 		).Logger()
@@ -386,9 +386,9 @@ func ExampleContext_Dict() {
 }
 
 func ExampleContext_Array() {
-	log := zerolog.New(os.Stdout).With().
+	log := zlog.New(os.Stdout).With().
 		Str("foo", "bar").
-		Array("array", zerolog.Arr().
+		Array("array", zlog.Arr().
 			Str("baz").
 			Int(1),
 		).Logger()
@@ -405,7 +405,7 @@ func ExampleContext_Array_object() {
 		User{"Bob", 55, time.Time{}},
 	}
 
-	log := zerolog.New(os.Stdout).With().
+	log := zlog.New(os.Stdout).With().
 		Str("foo", "bar").
 		Array("users", u).
 		Logger()
@@ -419,7 +419,7 @@ func ExampleContext_Object() {
 	// User implements zerolog.LogObjectMarshaler
 	u := User{"John", 35, time.Time{}}
 
-	log := zerolog.New(os.Stdout).With().
+	log := zlog.New(os.Stdout).With().
 		Str("foo", "bar").
 		Object("user", u).
 		Logger()
@@ -432,7 +432,7 @@ func ExampleContext_Object() {
 func ExampleContext_EmbedObject() {
 	price := Price{val: 6449, prec: 2, unit: "$"}
 
-	log := zerolog.New(os.Stdout).With().
+	log := zlog.New(os.Stdout).With().
 		Str("foo", "bar").
 		EmbedObject(price).
 		Logger()
@@ -449,7 +449,7 @@ func ExampleContext_Interface() {
 		Name: "john",
 	}
 
-	log := zerolog.New(os.Stdout).With().
+	log := zlog.New(os.Stdout).With().
 		Str("foo", "bar").
 		Interface("obj", obj).
 		Logger()
@@ -462,7 +462,7 @@ func ExampleContext_Interface() {
 func ExampleContext_Dur() {
 	d := 10 * time.Second
 
-	log := zerolog.New(os.Stdout).With().
+	log := zlog.New(os.Stdout).With().
 		Str("foo", "bar").
 		Dur("dur", d).
 		Logger()
@@ -478,7 +478,7 @@ func ExampleContext_Durs() {
 		20 * time.Second,
 	}
 
-	log := zerolog.New(os.Stdout).With().
+	log := zlog.New(os.Stdout).With().
 		Str("foo", "bar").
 		Durs("durs", d).
 		Logger()
@@ -490,7 +490,7 @@ func ExampleContext_Durs() {
 
 func ExampleContext_IPAddr() {
 	hostIP := net.IP{192, 168, 0, 100}
-	log := zerolog.New(os.Stdout).With().
+	log := zlog.New(os.Stdout).With().
 		IPAddr("HostIP", hostIP).
 		Logger()
 
@@ -501,7 +501,7 @@ func ExampleContext_IPAddr() {
 
 func ExampleContext_IPPrefix() {
 	route := net.IPNet{IP: net.IP{192, 168, 0, 0}, Mask: net.CIDRMask(24, 32)}
-	log := zerolog.New(os.Stdout).With().
+	log := zlog.New(os.Stdout).With().
 		IPPrefix("Route", route).
 		Logger()
 
@@ -512,7 +512,7 @@ func ExampleContext_IPPrefix() {
 
 func ExampleContext_MACAddr() {
 	mac := net.HardwareAddr{0x00, 0x14, 0x22, 0x01, 0x23, 0x45}
-	log := zerolog.New(os.Stdout).With().
+	log := zlog.New(os.Stdout).With().
 		MACAddr("hostMAC", mac).
 		Logger()
 
@@ -527,7 +527,7 @@ func ExampleContext_Fields_map() {
 		"n":   1,
 	}
 
-	log := zerolog.New(os.Stdout).With().
+	log := zlog.New(os.Stdout).With().
 		Str("foo", "bar").
 		Fields(fields).
 		Logger()
@@ -543,7 +543,7 @@ func ExampleContext_Fields_slice() {
 		"n", 1,
 	}
 
-	log := zerolog.New(os.Stdout).With().
+	log := zlog.New(os.Stdout).With().
 		Str("foo", "bar").
 		Fields(fields).
 		Logger()

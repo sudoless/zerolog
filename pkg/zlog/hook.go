@@ -1,4 +1,4 @@
-package zerolog
+package zlog
 
 // Hook defines an interface to a log hook.
 type Hook interface {

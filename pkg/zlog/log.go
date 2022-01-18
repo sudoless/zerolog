@@ -96,7 +96,7 @@
 //
 // In this case, many consumers will take the last value,
 // but this is not guaranteed; check yours if in doubt.
-package zerolog
+package zlog
 
 import (
 	"fmt"

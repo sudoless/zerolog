@@ -1,4 +1,4 @@
-package diode_test
+package zlog_diode_test
 
 import (
 	"io/ioutil"
@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/sudoless/zerolog/pkg/diode"
-	"github.com/sudoless/zerolog/pkg/zerolog"
+	"github.com/sudoless/zerolog/pkg/zlog"
+	zlog_diode "github.com/sudoless/zerolog/pkg/zlog-diode"
 )
 
 func Benchmark(b *testing.B) {
@@ -20,8 +20,8 @@ func Benchmark(b *testing.B) {
 	}
 	for name, interval := range benchs {
 		b.Run(name, func(b *testing.B) {
-			w := diode.NewWriter(ioutil.Discard, 100000, interval, nil)
-			log := zerolog.New(w)
+			w := zlog_diode.NewWriter(ioutil.Discard, 100000, interval, nil)
+			log := zlog.New(w)
 			defer w.Close()
 
 			b.SetParallelism(1000)
