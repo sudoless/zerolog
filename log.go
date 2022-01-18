@@ -106,6 +106,8 @@ import (
 	"strconv"
 )
 
+const contextCallerSkipFrameCount = 3
+
 // Level defines log levels.
 type Level int8
 
