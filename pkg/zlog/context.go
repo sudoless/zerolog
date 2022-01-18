@@ -322,7 +322,7 @@ func (c Context) Floats64(key string, f []float64) Context {
 
 type timestampHook struct{}
 
-func (ts timestampHook) Run(e *Event, level Level, msg string) {
+func (ts timestampHook) Run(e *Event, _ Level, _ string) {
 	e.Timestamp()
 }
 

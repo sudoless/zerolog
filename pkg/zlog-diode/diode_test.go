@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/sudoless/zerolog/pkg/zlog"
-	zlog_diode "github.com/sudoless/zerolog/pkg/zlog-diode"
+	zlogDiode "github.com/sudoless/zerolog/pkg/zlog-diode"
 )
 
 func Benchmark(b *testing.B) {
@@ -20,14 +20,14 @@ func Benchmark(b *testing.B) {
 	}
 	for name, interval := range benchs {
 		b.Run(name, func(b *testing.B) {
-			w := zlog_diode.NewWriter(ioutil.Discard, 100000, interval, nil)
-			log := zlog.New(w)
+			w := zlogDiode.NewWriter(ioutil.Discard, 100000, interval, nil)
+			logger := zlog.New(w)
 			defer w.Close()
 
 			b.SetParallelism(1000)
 			b.RunParallel(func(pb *testing.PB) {
 				for pb.Next() {
-					log.Print("test")
+					logger.Print("test")
 				}
 			})
 		})

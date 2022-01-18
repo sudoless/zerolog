@@ -848,7 +848,7 @@ type errWriter struct {
 	error
 }
 
-func (w errWriter) Write(p []byte) (n int, err error) {
+func (w errWriter) Write(_ []byte) (n int, err error) {
 	return 0, w.error
 }
 

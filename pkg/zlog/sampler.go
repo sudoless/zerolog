@@ -27,7 +27,7 @@ type Sampler interface {
 type RandomSampler uint32
 
 // Sample implements the Sampler interface.
-func (s RandomSampler) Sample(lvl Level) bool {
+func (s RandomSampler) Sample(_ Level) bool {
 	if s <= 0 {
 		return false
 	}
@@ -47,7 +47,7 @@ type BasicSampler struct {
 }
 
 // Sample implements the Sampler interface.
-func (s *BasicSampler) Sample(lvl Level) bool {
+func (s *BasicSampler) Sample(_ Level) bool {
 	n := s.N
 	if n == 1 {
 		return true

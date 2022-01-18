@@ -21,7 +21,7 @@ type levelWriterAdapter struct {
 	io.Writer
 }
 
-func (lw levelWriterAdapter) WriteLevel(l Level, p []byte) (n int, err error) {
+func (lw levelWriterAdapter) WriteLevel(_ Level, p []byte) (n int, err error) {
 	return lw.Write(p)
 }
 

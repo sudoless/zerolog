@@ -55,7 +55,7 @@ func ExampleLogger_Sample() {
 
 type LevelNameHook struct{}
 
-func (h LevelNameHook) Run(e *zlog.Event, l zlog.Level, msg string) {
+func (h LevelNameHook) Run(e *zlog.Event, l zlog.Level, _ string) {
 	if l != zlog.NoLevel {
 		e.Str("level_name", l.String())
 	} else {
@@ -65,7 +65,7 @@ func (h LevelNameHook) Run(e *zlog.Event, l zlog.Level, msg string) {
 
 type MessageHook string
 
-func (h MessageHook) Run(e *zlog.Event, l zlog.Level, msg string) {
+func (h MessageHook) Run(e *zlog.Event, _ zlog.Level, msg string) {
 	e.Str("the_message", msg)
 }
 
