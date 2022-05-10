@@ -8,9 +8,7 @@ import (
 	"time"
 )
 
-var (
-	fakeMessage = "Test logging, but use a somewhat realistic message length."
-)
+var fakeMessage = "Test logging, but use a somewhat realistic message length."
 
 func BenchmarkLogEmpty(b *testing.B) {
 	logger := New(ioutil.Discard)
