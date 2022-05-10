@@ -64,7 +64,7 @@ func TestCtxDisabled(t *testing.T) {
 	}
 
 	ctx = dl.WithContext(ctx)
-	if !reflect.DeepEqual(Ctx(ctx), &l) {
+	if !reflect.DeepEqual(Ctx(ctx), &dl) {
 		t.Error("WithContext did not override logger with a disabled logger")
 	}
 }
